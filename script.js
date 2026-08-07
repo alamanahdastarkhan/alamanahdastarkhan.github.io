@@ -1,1 +1,11 @@
-console.log('Al Amanah Dastarkhan loaded');
+const WHATSAPP="8801749029247";
+const productGrid=document.getElementById("productGrid"),categoryList=document.getElementById("categoryList"),categoryFilter=document.getElementById("categoryFilter"),searchInput=document.getElementById("searchInput"),emptyState=document.getElementById("emptyState"),menuToggle=document.querySelector(".menu-toggle"),nav=document.querySelector(".nav");
+let products=[];
+menuToggle.addEventListener("click",()=>nav.classList.toggle("open"));
+document.querySelectorAll(".nav a").forEach(a=>a.addEventListener("click",()=>nav.classList.remove("open")));
+function money(n){return "৳ "+Number(n).toLocaleString("bn-BD")}
+function waLink(p){const t=`আসসালামু আলাইকুম, আমি "${p.name}" অর্ডার করতে চাই। দাম: ${money(p.price)}।`;return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(t)}`}
+function renderCategories(){const cats=[...new Set(products.map(p=>p.category))];categoryList.innerHTML=cats.map(c=>`<button class="category-card" data-category="${c}"><div class="category-icon">${products.find(p=>p.category===c)?.icon||"🛍️"}</div><strong>${c}</strong></button>`).join("");categoryFilter.innerHTML='<option value="all">সব ক্যাটাগরি</option>'+cats.map(c=>`<option value="${c}">${c}</option>`).join("");categoryList.querySelectorAll(".category-card").forEach(b=>b.addEventListener("click",()=>{categoryFilter.value=b.dataset.category;renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"})}))}
+function renderProducts(){const q=searchInput.value.trim().toLowerCase(),cat=categoryFilter.value,filtered=products.filter(p=>(cat==="all"||p.category===cat)&&(`${p.name} ${p.description}`.toLowerCase().includes(q)));productGrid.innerHTML=filtered.map(p=>`<article class="product-card"><div class="product-image">${p.image?`<img src="${p.image}" alt="${p.name}">`:`<span>${p.icon||"📦"}<br>ছবি পরে যোগ হবে</span>`}</div><div class="product-info"><span class="product-category">${p.category}</span><h3>${p.name}</h3><p class="product-description">${p.description}</p><div class="price">${money(p.price)}</div><a class="order-btn" href="${waLink(p)}" target="_blank" rel="noopener">WhatsApp-এ অর্ডার করুন</a></div></article>`).join("");emptyState.hidden=filtered.length!==0}
+searchInput.addEventListener("input",renderProducts);categoryFilter.addEventListener("change",renderProducts);
+fetch("products.json").then(r=>r.json()).then(d=>{products=d;renderCategories();renderProducts()}).catch(()=>{productGrid.innerHTML="<p>পণ্যের তথ্য লোড করা যায়নি।</p>"});
