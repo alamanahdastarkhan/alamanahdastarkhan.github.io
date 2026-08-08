@@ -17,3 +17,12 @@
 footer{text-align:center;padding:35px 6%;background:var(--dark);color:white}footer p{opacity:.75;font-size:.9rem}
 @media(max-width:850px){.nav{display:none}.menu-toggle{display:block}.nav.open{display:flex;position:absolute;left:0;right:0;top:70px;background:white;padding:18px 6%;flex-direction:column;border-bottom:1px solid var(--border)}.hero{grid-template-columns:1fr;padding-top:50px}.category-grid{grid-template-columns:repeat(2,1fr)}.product-grid{grid-template-columns:repeat(2,1fr)}.about-card{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.site-header{padding:12px 4%}.tagline{font-size:.62rem}.hero{padding-left:4%;padding-right:4%}.section{padding:55px 4%}.category-grid,.product-grid{grid-template-columns:1fr}.shop-tools{flex-direction:column}.hero-placeholder{min-height:260px}}
+.founder-info{text-align:center;margin-top:18px}.founder-info h3{margin:0 0 10px}.founder-info p{margin:5px 0;line-height:1.6}
+
+.brand-tagline{font-weight:600;line-height:1.7}
+.hero-visual img{width:100%;height:100%;object-fit:cover;border-radius:18px}
+.founder-info{margin-top:16px}
+.founder-info h3{margin:0 0 8px}
+.founder-info p{margin:4px 0;line-height:1.6}
+
+.founder-photo{overflow:hidden}.founder-photo img{display:block;width:100%;height:100%;object-fit:cover;border-radius:16px}
